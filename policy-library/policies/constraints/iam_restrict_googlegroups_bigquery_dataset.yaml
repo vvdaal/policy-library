@@ -1,0 +1,21 @@
+apiVersion: constraints.gatekeeper.sh/v1alpha1
+kind: GCPIAMAllowedBindingsConstraintV3
+metadata:
+  name: restrict-googlegroups-bigquery-dataset
+  annotations:
+    description: "Enforce corporate domain by banning googlegroups.com addresses access
+      to BigQuery datasets"
+    bundles.validator.forsetisecurity.org/forseti-security: v2.26.0
+spec:
+  severity: high
+  match:
+    target: # {"$ref":"#/definitions/io.k8s.cli.setters.target"}
+    - organizations/**
+    exclude: []
+  parameters:
+    mode: denylist
+    assetType: bigquery.googleapis.com/Dataset
+    assetNames: []
+    role: roles/*
+    members:
+    - 'user:*@googlegroups.com'

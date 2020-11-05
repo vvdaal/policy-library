@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: policy-library
+upstream:
+  type: git
+  git:
+    commit: 73fdd2fee8f9aa71f66e6cc1d1c781a712f6cf73
+    repo: https://github.com/forseti-security/policy-library
+    directory: /
+    ref: master
